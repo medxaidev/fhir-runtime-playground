@@ -4,6 +4,7 @@ import { CheckCircle, XCircle, ChevronDown, ChevronRight, AlertCircle } from 'lu
 import { SnapshotDiffPanel, computeSnapshotDiff } from './SnapshotDiffPanel';
 import type { ElementDiff } from './SnapshotDiffPanel';
 import type { PipelineResult } from './validationPipeline';
+import { publicUrl } from '../../lib/publicBaseUrl';
 
 interface ValidationResultPanelProps {
   result: PipelineResult | null;
@@ -50,7 +51,7 @@ export function ValidationResultPanel({ result, loading }: ValidationResultPanel
       const baseUrl = result.parsedSd.baseDefinition;
       if (baseUrl) {
         const baseName = baseUrl.split('/').pop() ?? '';
-        const resp = await fetch(`/spec/r4/StructureDefinition-${baseName}.json`);
+        const resp = await fetch(publicUrl(`spec/r4/StructureDefinition-${baseName}.json`));
         if (resp.ok) {
           const baseSd = await resp.json();
           const baseElements = baseSd.snapshot?.element ?? [];

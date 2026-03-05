@@ -262,7 +262,7 @@ export function ApiReferenceModule() {
       <Card withBorder padding="md">
         <Text fw={600} size="sm" mb="xs">Module Chain</Text>
         <Code block fz={12}>
-{`model ← parser ← context ← profile ← validator
+          {`model ← parser ← context ← profile ← validator
                                   ↑
                               fhirpath`}
         </Code>
@@ -277,26 +277,26 @@ export function ApiReferenceModule() {
       <Stack gap="sm">
         <Title order={4}>Typical Usage Pattern</Title>
         <Code block fz={11}>
-{`// 1. Setup context
+          {`// 1. Setup context
 const ctx = new FhirContextImpl({ loaders: [new MemoryLoader(new Map())] });
 
 // 2. Load core definitions (browser: fetch + register manually)
-const bundle = await fetch('/spec/r4/profiles-types.json').then(r => r.json());
-for (const entry of bundle.entry) {
+const bundle = await fetch('\\${import.meta.env.BASE_URL}spec/r4/profiles-types.json').then(r => r.json());
+          for (const entry of bundle.entry) {
   const result = parseStructureDefinition(entry.resource, '');
-  if (result.success) ctx.registerStructureDefinition(result.data);
+          if (result.success) ctx.registerStructureDefinition(result.data);
 }
 
-// 3. Generate snapshot for a profile
-const sd = parseStructureDefinition(profileJson, '').data;
-const generator = new SnapshotGenerator(ctx);
-const snapshot = generator.generate(sd);
+          // 3. Generate snapshot for a profile
+          const sd = parseStructureDefinition(profileJson, '').data;
+          const generator = new SnapshotGenerator(ctx);
+          const snapshot = generator.generate(sd);
 
-// 4. Build canonical + validate
-const canonical = buildCanonicalProfile(snapshot.structureDefinition);
-const resource = parseFhirJson(resourceJson).data;
-const validator = new StructureValidator();
-const result = validator.validate(resource, canonical);
+          // 4. Build canonical + validate
+          const canonical = buildCanonicalProfile(snapshot.structureDefinition);
+          const resource = parseFhirJson(resourceJson).data;
+          const validator = new StructureValidator();
+          const result = validator.validate(resource, canonical);
 // result.valid, result.issues
 
 // 5. FHIRPath (standalone — no context needed)
@@ -322,7 +322,7 @@ const values = evalFhirPath('Patient.name.given', rawJsonObject);`}
       <Stack gap="sm">
         <Title order={4}>Key Types</Title>
         <Code block fz={11}>
-{`// Parse result — all parse functions return this
+          {`// Parse result — all parse functions return this
 interface ParseResult<T> {
   success: boolean;
   data: T;               // The parsed object (available even on partial success)

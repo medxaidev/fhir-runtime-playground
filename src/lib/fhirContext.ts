@@ -4,6 +4,7 @@ import {
   parseStructureDefinition,
 } from 'fhir-runtime';
 import type { StructureDefinition } from 'fhir-runtime';
+import { publicUrl } from './publicBaseUrl';
 
 let _ctx: FhirContextImpl | null = null;
 let _initPromise: Promise<FhirContextImpl> | null = null;
@@ -30,8 +31,8 @@ export async function getFhirContext(): Promise<FhirContextImpl> {
  * (primitive types, complex types, and resource definitions).
  */
 const CORE_BUNDLES = [
-  '/spec/r4/profiles-types.json',
-  '/spec/r4/profiles-resources.json',
+  publicUrl('spec/r4/profiles-types.json'),
+  publicUrl('spec/r4/profiles-resources.json'),
 ];
 
 async function _initContext(): Promise<FhirContextImpl> {
