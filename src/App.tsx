@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { MantineProvider, AppShell, Tabs, Text, Group, ThemeIcon } from '@mantine/core';
-import { Stethoscope, ShieldCheck, GitCompareArrows, Terminal } from 'lucide-react';
+import { Stethoscope, ShieldCheck, GitCompareArrows, Terminal, Home, BookOpen } from 'lucide-react';
+import { HomeModule } from '@/modules/home/HomeModule';
+import { ApiReferenceModule } from '@/modules/apiref/ApiReferenceModule';
 import { ExploreModule } from '@/modules/explore/ExploreModule';
+import { ValidateModule } from '@/modules/validate/ValidateModule';
+import { DiffModule } from '@/modules/diff/DiffModule';
+import { FhirPathModule } from '@/modules/fhirpath/FhirPathModule';
 
-type TabValue = 'explore' | 'validate' | 'diff' | 'fhirpath';
+type TabValue = 'home' | 'apiref' | 'explore' | 'validate' | 'diff' | 'fhirpath';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState<TabValue>('explore');
+  const [activeTab, setActiveTab] = useState<TabValue>('home');
 
   return (
     <MantineProvider defaultColorScheme="light">
@@ -25,6 +30,12 @@ export function App() {
         <AppShell.Main>
           <Tabs value={activeTab} onChange={(v) => setActiveTab(v as TabValue)}>
             <Tabs.List mb="md">
+              <Tabs.Tab value="home" leftSection={<Home size={16} />}>
+                Home
+              </Tabs.Tab>
+              <Tabs.Tab value="apiref" leftSection={<BookOpen size={16} />}>
+                API Reference
+              </Tabs.Tab>
               <Tabs.Tab value="explore" leftSection={<Stethoscope size={16} />}>
                 Explore
               </Tabs.Tab>
@@ -39,20 +50,28 @@ export function App() {
               </Tabs.Tab>
             </Tabs.List>
 
+            <Tabs.Panel value="home">
+              <HomeModule />
+            </Tabs.Panel>
+
+            <Tabs.Panel value="apiref">
+              <ApiReferenceModule />
+            </Tabs.Panel>
+
             <Tabs.Panel value="explore">
               <ExploreModule />
             </Tabs.Panel>
 
             <Tabs.Panel value="validate">
-              <Text c="dimmed" ta="center" py="xl">Validate module — coming in Stage 2</Text>
+              <ValidateModule />
             </Tabs.Panel>
 
             <Tabs.Panel value="diff">
-              <Text c="dimmed" ta="center" py="xl">Diff module — coming in Stage 3</Text>
+              <DiffModule />
             </Tabs.Panel>
 
             <Tabs.Panel value="fhirpath">
-              <Text c="dimmed" ta="center" py="xl">FHIRPath module — coming in Stage 4</Text>
+              <FhirPathModule />
             </Tabs.Panel>
           </Tabs>
         </AppShell.Main>
