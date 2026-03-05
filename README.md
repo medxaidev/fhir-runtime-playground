@@ -14,10 +14,10 @@ FHIR Runtime Playground is a comprehensive web application for exploring, valida
 
 **Key Features:**
 
-- 🔍 **Explore** - Browse FHIR R4 and US Core resource element trees
-- ✅ **Validate** - Validate resources against StructureDefinition profiles
-- 🔄 **Diff** - Compare two StructureDefinitions element-by-element
-- 📝 **FHIRPath** - Evaluate FHIRPath expressions against resources
+- 🔍 **Explore** - Browse FHIR R4 and US Core resource element trees.
+- ✅ **Validate** - Validate resources against StructureDefinition profiles.
+- 🔄 **Diff** - Compare two StructureDefinitions element-by-element.
+- 📝 **FHIRPath** - Evaluate FHIRPath expressions against resources.
 
 ## Features
 
